@@ -1,18 +1,20 @@
 import { NavLink } from "react-router-dom"
-import style from "./../NavBar/Navbar.module.scss"
-
+import style from "./Navbar.module.scss"
+import logo from "../../assets/logo/logo-white.png"
 export function Navbar() {
   
   return (
-    <div>
+    <div className={style.img}>
 
-
+    <figure >
+    <img src={logo} alt="Gratissimo_logo" />
+    </figure>
 
       <nav className={style.Navstyle}>
         <ul>
-          <li><NavLink to={"/Forside"}>Alle Jobs</NavLink></li>
+          <li><NavLink to={"/"}>Alle Jobs</NavLink></li>
           <li><NavLink to={"/OpretAnnonce"}>Opret Annonce</NavLink></li>
-          <li><NavLink to={"/Nyheds-side"}>Nyheder</NavLink></li>
+          <li><NavLink to={"/Nyhedsside"}>Nyheder</NavLink></li>
            <li><NavLink to={"/OpretProfil"}>Opret Profil</NavLink></li>
            <li><NavLink to={"/Login"}>Log ind</NavLink></li>
         </ul>

@@ -1,9 +1,15 @@
 import {BrowserRouter, Routes, Route} from 'react-router'
 import { Forside } from './Pages/Forside/Forside'
-import { Nyhedsside } from './Pages/Nyheds-Side/Nyheds-side'
+import { Nyhedsside } from './Pages/NyhedsSide/Nyhedsside'
 import { Søgeresultater } from './Pages/Søgeresultater/Søgeresultater'
-import { Navbar } from './Components/Navbar/Navbar'
-
+import { OpretAnnonce } from './Pages/OpretAnnonce/OpretAnnonce'
+import { Mainlayout } from './Layout/Mainlayout'
+import { SøgeresultatSidenUdvidet } from './Pages/SøgeresultatSidenUdvidet/SøgeresultatSidenUdvidet'
+import { OpretProfil } from './Pages/OpretProfil/OpretProfil'
+import { Login } from './Pages/Loginside/Login'
+import { MinsideAnnoncevalgt } from './Pages/MinSideAnnoncevalgt/MinsideAnnoncevalgt'
+import {MinsideFavoritvalgt} from './Pages/MinSideFavoritvalgt/MinsideFavoritvalgt'
+import {MinsideRediger} from './Pages/MinSideRediger/MinsideRediger'
 
 function App() {
   
@@ -11,13 +17,19 @@ function App() {
   return (
     <>
      <BrowserRouter>
-    <Navbar/>
       <Routes>
+      <Route element={<Mainlayout/>}>
       <Route path="/" element={<Forside/>} />
-      <Route path="/Nyheder" element={<Nyhedsside/>} />
-      <Route path="/classdetails/:id" element={<Søgeresultater/>} />
-      {/* <Route path="/search" element={<Search />} />
-      <Route path="/myschedule" element={<MySchedule />} /> */}
+      <Route path="/Nyhedsside" element={<Nyhedsside/>} />
+      <Route path="/Søgeresultater" element={<Søgeresultater/>} />
+      <Route path="/SøgeresultaterUdvidet" element={<SøgeresultatSidenUdvidet/>} />
+      <Route path="/OpretAnnonce" element={<OpretAnnonce/>} />
+      <Route path="/Logind" element={<Login/>} />
+      <Route path="/OpretProfil" element={<OpretProfil/>} />
+      <Route path="/Minannonce" element={<MinsideAnnoncevalgt/>} />
+      <Route path="/Minfavoritter" element={<MinsideFavoritvalgt/>} />
+      <Route path="/Redigerminside" element={<MinsideRediger/>} />
+      </Route>
       </Routes>
     </BrowserRouter>
     </>

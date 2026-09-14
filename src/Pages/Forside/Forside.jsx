@@ -1,6 +1,23 @@
+import style from "./Forside.module.scss"
+
 export function Forside() {
 
     return(
-        <h1>Forside</h1>
+        <>
+
+        <section >
+            <h2>Vi hjælper dig på vej til dit næste frivillige job</h2>
+
+            <button>Log ind eller opret dig</button>
+        </section>
+
+
+        <section className={style.Filtersection}>
+
+        <h1>Søg Frigvillig arbejde</h1>
+        
+        </section>
+        
+        </>
     )
 }
