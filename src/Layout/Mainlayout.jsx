@@ -7,7 +7,7 @@ return(
     <>
     <Navbar/>
     <Outlet/>
-    <Footer/>
+    <Footer/> 
     </>
 )
 }

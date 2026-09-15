@@ -1,6 +1,8 @@
 @use '../../globals.scss' as globals;
 
 
-.Filtersection{
-    background-color: globals.$color-light-grey;
+.Kategorystyle{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr );
+    
 }
