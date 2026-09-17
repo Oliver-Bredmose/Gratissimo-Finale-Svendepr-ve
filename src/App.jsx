@@ -10,6 +10,7 @@ import { Login } from './Pages/Loginside/Login'
 import { MinsideAnnoncevalgt } from './Pages/MinSideAnnoncevalgt/MinsideAnnoncevalgt'
 import {MinsideFavoritvalgt} from './Pages/MinSideFavoritvalgt/MinsideFavoritvalgt'
 import {MinsideRediger} from './Pages/MinSideRediger/MinsideRediger'
+import { Nyheder } from './Pages/Nyheder/Nyheder'
 
 function App() {
   
@@ -20,9 +21,10 @@ function App() {
       <Routes>
       <Route element={<Mainlayout/>}>
       <Route path="/" element={<Forside/>} />
-      <Route path="/Nyhedsside/:id" index element={<Nyhedsside/>} />
+      <Route path="/Nyhedsside" element={<Nyheder />} />
+      <Route path="/Nyhedsside/:id" element={<Nyhedsside />} />
       <Route path="/Søgeresultater" element={<Søgeresultater/>} />
-      <Route path="/SøgeresultaterUdvidet" element={<SøgeresultatSidenUdvidet/>} />
+      <Route path="/Søgeresultater/:id" element={<SøgeresultatSidenUdvidet/>} />
       <Route path="/OpretAnnonce" element={<OpretAnnonce/>} />
       <Route path="/Logind" element={<Login/>} />
       <Route path="/OpretProfil" element={<OpretProfil/>} />

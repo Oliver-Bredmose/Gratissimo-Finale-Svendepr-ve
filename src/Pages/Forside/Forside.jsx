@@ -40,7 +40,6 @@ export function Forside() {
             return(
                 <Kategorijob
                     key={item.id}
-                    id={item.id}
                     name={item.name}
                     />
             )
@@ -48,9 +47,8 @@ export function Forside() {
             </section>
 
             <section>
-                <NyhedsCards/>
+                <NyhedsCards antal={3}/>
                 <Testimonies testimonyData={testimonyData} />
-                 {/* {testimonyData && <Slider testimonyData={testimonyData}/>} */}
             </section>
         </>
     )

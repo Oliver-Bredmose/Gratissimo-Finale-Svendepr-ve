@@ -1,6 +1,11 @@
 .NyhedsCards {
   display: flex;
   gap: 20px;
+  background-color: red;
+
+  a {
+    color: inherit; text-decoration: none; 
+  }
 }
 
 div{

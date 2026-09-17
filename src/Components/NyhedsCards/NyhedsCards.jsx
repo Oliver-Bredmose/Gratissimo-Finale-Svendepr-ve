@@ -1,7 +1,8 @@
+import { NavLink } from "react-router-dom";
 import { useFetch } from "../../Hooks/useFetch";
 import style from "./NyhedsCards.module.scss"
 
-export function NyhedsCards() {
+export function NyhedsCards({antal}) {
 
   const {data} = useFetch(
         import.meta.env.VITE_PUBLIC_BASE_URL + '/api/articles'
@@ -11,9 +12,10 @@ export function NyhedsCards() {
     
 
    return (
-    <div className={style.NyhedsCards}>
-      {data?.slice(0, 3).map((article) => (
-        <article key={article.id}>
+  <div className={style.NyhedsCards}>
+    {data?.slice(0, antal).map((article) => (
+      <NavLink key={article.id} to={`/Nyhedsside/${article.id}`}>
+        <article>
           <figure>
             <img src={`http://localhost:4000${article.imageUrl}`} alt={''} />
           </figure>
@@ -22,7 +24,8 @@ export function NyhedsCards() {
             <h4>{article.title}</h4>
           </section>
         </article>
-      ))}
-    </div>
-  );
+      </NavLink>
+    ))}
+  </div>
+);
 }
