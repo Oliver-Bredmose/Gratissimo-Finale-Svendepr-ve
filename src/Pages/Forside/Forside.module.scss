@@ -4,5 +4,28 @@
 .Kategorystyle{
     display: grid;
     grid-template-columns: repeat(3, 1fr );
+
+}
+
+.Loginbtn{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+    margin-top: 20px;
     
+
+    h2{
+        display: flex;
+        margin-left: 30px;
+        margin-top: 20px;
+        
+    }
+        a{
+            background-color: globals.$color-Main-red;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            padding: 8px 40px;   
+            align-self: center;
+        }
 }

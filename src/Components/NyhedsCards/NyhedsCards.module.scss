@@ -1,0 +1,16 @@
+.NyhedsCards {
+  display: flex;
+  gap: 20px;
+}
+
+div{
+    display: flex;
+    justify-items: center;
+}
+
+.NyhedsCards img {    
+justify-self: center;
+width: 200px;
+height: 120px;
+object-fit: cover;
+}

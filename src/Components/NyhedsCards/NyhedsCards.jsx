@@ -1,8 +1,9 @@
 import { useFetch } from "../../Hooks/useFetch";
+import style from "./NyhedsCards.module.scss"
 
-export function NyhedsCards({}) {
+export function NyhedsCards() {
 
-    const {data, isLoading, error} = useFetch(
+  const {data} = useFetch(
         import.meta.env.VITE_PUBLIC_BASE_URL + '/api/articles'
     );
 
@@ -10,16 +11,15 @@ export function NyhedsCards({}) {
     
 
    return (
-    <div>
-      {data?.map((article) => (
+    <div className={style.NyhedsCards}>
+      {data?.slice(0, 3).map((article) => (
         <article key={article.id}>
           <figure>
-            <img src={article.image} alt={'Nyhed'} />
+            <img src={`http://localhost:4000${article.imageUrl}`} alt={''} />
           </figure>
           <section>
-            <h6>{article.createdAt}- {article.author}</h6> 
+            <h6> {article.createdAt.split("T")[0].split("-").slice(1).reverse().join("/")}- {article.author}</h6>
             <h4>{article.title}</h4>
-            
           </section>
         </article>
       ))}

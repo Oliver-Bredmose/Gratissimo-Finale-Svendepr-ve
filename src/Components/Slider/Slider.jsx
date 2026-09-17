@@ -1,16 +1,14 @@
-import { useState } from "react"
+import { Testimonies } from "../Testimonies/Testimonies";
 
 export function Slider() {
 
-    const [sliderIndex, setSliderIndex] = useState(0);
-    
-    
-
-    function forward(){
-        if sliderIndex >= 
-    }
     
     return (
-
+        <>
+        <div>
+            <h2>Slider virker</h2>
+            <Testimonies/>        
+        </div>
+        </>
     )
 }

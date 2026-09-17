@@ -1,26 +1,45 @@
+import { Filtering } from "../../Components/Filterring/Filtering";
 import { Kategorijob } from "../../Components/Katekorijob/katekorijob";
 import { NyhedsCards } from "../../Components/NyhedsCards/NyhedsCards";
+import { Slider } from "../../Components/Slider/Slider";
+import { Testimonies } from "../../Components/Testimonies/Testimonies";
 import { useFetch } from "../../Hooks/useFetch"
 import style from "./Forside.module.scss"
+import { Link } from "react-router-dom"
 
 export function Forside() {
 
 
-        const {data, isLoading, error} = useFetch(import.meta.env.VITE_PUBLIC_BASE_URL + '/api/job-categories')
+        const {
+            data: categoriesData,
+            isLoading: categoriesLoading,
+            error: categoriesError,
+            } = useFetch( import.meta.env.VITE_PUBLIC_BASE_URL + '/api/job-categories')
+
+        const {
+            data: testimonyData,
+            isLoading: testimonyLoading,
+            error: testimonyError,
+            } = useFetch( import.meta.env.VITE_PUBLIC_BASE_URL + '/api/testimony');
         
-        
-        console.log(data);
+        console.log(categoriesData);
+
+        console.log("testimonial: ", testimonyData)
+
         return(
             <>
-        <section >
-            <h2>Vi hjælper dig på vej til dit næste frivillige job</h2> 
-            <button>Log ind eller opret dig</button>
+        <section className={style.Loginbtn}>
+        <h2>Vi hjælper dig på vej til dit næste frivillige job</h2>
+        <Link to="/Login">Log ind eller opret dig</Link>
         </section>
+            <br />
+            <Filtering/>
 
             <section className={style.Kategorystyle}>
-        {data?.map((item) => {
+        {categoriesData?.map((item) => {
             return(
                 <Kategorijob
+                    key={item.id}
                     id={item.id}
                     name={item.name}
                     />
@@ -30,8 +49,9 @@ export function Forside() {
 
             <section>
                 <NyhedsCards/>
+                <Testimonies testimonyData={testimonyData} />
+                 {/* {testimonyData && <Slider testimonyData={testimonyData}/>} */}
             </section>
         </>
     )
 }
-    

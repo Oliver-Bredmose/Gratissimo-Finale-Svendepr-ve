@@ -1,5 +1,8 @@
 import style from './Footer.module.scss'
 import facebookIcon from '../../assets/icons/SoMe/Facebook.png'
+import googleIcon from '../../assets/icons/SoMe/Google Plus.png'
+import instagramIcon from '../../assets/icons/SoMe/instagram Circle.png'
+import linkedinIcon from '../../assets/icons/SoMe/Linkedin Circled.png'
 
 export function Footer() {
 
@@ -46,7 +49,10 @@ export function Footer() {
                 <p>Fidusvej 23</p>
                 <p>9230 Øster Lundby</p>
                 <p>+45 22 13 22 13</p>
+                <img src={linkedinIcon} alt="Linkedin" />
                 <img src={facebookIcon} alt="Facebook" />
+                <img src={instagramIcon} alt="Instagram" />
+                <img src={googleIcon} alt="Google" />
             </section>
 
         </footer>
