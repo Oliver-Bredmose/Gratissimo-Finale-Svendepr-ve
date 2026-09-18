@@ -1,7 +1,6 @@
 import { Filtering } from "../../Components/Filterring/Filtering";
 import { Kategorijob } from "../../Components/Katekorijob/katekorijob";
 import { NyhedsCards } from "../../Components/NyhedsCards/NyhedsCards";
-import { Slider } from "../../Components/Slider/Slider";
 import { Testimonies } from "../../Components/Testimonies/Testimonies";
 import { useFetch } from "../../Hooks/useFetch"
 import { Søgeresultater } from "../Søgeresultater/Søgeresultater";
@@ -46,7 +45,7 @@ export function Forside() {
             )
         })}
             </section>
-            <Søgeresultater/>
+            
             <section>
                 <NyhedsCards antal={3}/>
                 <Testimonies testimonyData={testimonyData} />
