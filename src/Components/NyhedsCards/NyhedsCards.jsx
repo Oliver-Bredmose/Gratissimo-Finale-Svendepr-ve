@@ -17,7 +17,7 @@ export function NyhedsCards({antal}) {
       <NavLink key={article.id} to={`/Nyhedsside/${article.id}`}>
         <article>
           <figure>
-            <img src={`http://localhost:4000${article.imageUrl}`} alt={''} />
+            <img src={`${import.meta.env.VITE_PUBLIC_BASE_URL}${article.imageUrl}`} alt={''} />
           </figure>
           <section>
             <h6> {article.createdAt.split("T")[0].split("-").slice(1).reverse().join("/")}- {article.author}</h6>

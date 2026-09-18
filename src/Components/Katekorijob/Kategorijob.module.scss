@@ -1,10 +1,32 @@
 @use '../../globals.scss' as globals;
 
-.Kategorijob{
-    display: flex;
-    justify-content: space-evenly;
-}
+.Kategorijob {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #fff;
+  
 
-div{
-    margin-top: 30px;
+  h5 {
+    margin: 0;
+    padding: 1rem 1.5rem;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+    padding: 1rem 2rem;
+    background: #faf0ee;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

@@ -25,17 +25,23 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  background-color: globals.$color-Main-red;
 
-  figure {
-    margin: 0;
-    width: 100%;
-    background-color: globals.$color-Main-red;
+  
+  a{
+
+    figure {
+      margin: 0;
+      width: 100%;
     
-    img {
-     display: block;
-     width: 300px;
-     height: auto;
+      img {
+       display: block;
+       width: 300px;
+       height: auto;
+      }
+
     }
+    
   }
 }
 

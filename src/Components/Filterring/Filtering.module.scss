@@ -5,7 +5,28 @@
     background-color: globals.$color-light-grey;
     
     input{
-        
+        border-radius: 20px;
+        margin-left: 5vh;
     }
 
+    select{
+        
+        border-radius: 20px;
+        padding-left: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-left: 50px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    h1{
+        margin-left: 5vh;
+
+    }
+    
+    h3{
+        margin-left: 5vh;
+        padding-bottom: 10px;
+    }
 }

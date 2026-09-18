@@ -1,7 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router'
 import { Forside } from './Pages/Forside/Forside'
 import { Nyhedsside } from './Pages/NyhedsSide/Nyhedsside'
-import { Søgeresultater } from './Pages/Søgeresultater/Søgeresultater'
+// import { Søgeresultater } from './Pages/Søgeresultater/Søgeresultater'
 import { OpretAnnonce } from './Pages/OpretAnnonce/OpretAnnonce'
 import { Mainlayout } from './Layout/Mainlayout'
 import { SøgeresultatSidenUdvidet } from './Pages/SøgeresultatSidenUdvidet/SøgeresultatSidenUdvidet'
@@ -23,7 +23,7 @@ function App() {
       <Route path="/" element={<Forside/>} />
       <Route path="/Nyhedsside" element={<Nyheder />} />
       <Route path="/Nyhedsside/:id" element={<Nyhedsside />} />
-      <Route path="/Søgeresultater" element={<Søgeresultater/>} />
+      {/* <Route path="/Søgeresultater" element={<Søgeresultater/>} /> */}
       <Route path="/Søgeresultater/:id" element={<SøgeresultatSidenUdvidet/>} />
       <Route path="/OpretAnnonce" element={<OpretAnnonce/>} />
       <Route path="/Logind" element={<Login/>} />

@@ -1,4 +1,4 @@
-import { useFetch } from "../../Hooks/useFetch";
+import { useFetch } from "./../../Hooks/useFetch";
 import style from "./Nyhedsside.module.scss"
 
 export function Nyhedsside() {

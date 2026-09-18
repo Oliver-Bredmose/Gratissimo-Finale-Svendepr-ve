@@ -25,18 +25,17 @@ export function Filtering() {
       <button>Søg</button>
   <br />
   <br />
+  <h3>Filter</h3>
       <select value={category} onChange={(e) => setCategory(e.target.value)}>
   
       <option value="">Vælg kategori</option>
   
       {/* Vis "Henter..."" mens at du henter kategorierne og så fjern det når du har hentet dem
-      Det er fin til at hvis du har stor api men her er like nok 2 millisekunder det tager
-       så du behøver ikke at vise det hvis det bare forvirrer dig */}
+      Det er fin til at hvis du har stor api */}
 
       {isLoading && <option disabled>Henter...</option>}
   
-      {/* Du kunne add en error message så du kan display fejlen fra useFetch hvis du har lyst
-       men ellers er den her ret simpel error handling */}
+        {/*Error handling den viser simpel bare hvis der er en fejl istedet for hvid skærm */}       
 
       {error && <option disabled>Kunne ikke hente kategorier</option>}
       

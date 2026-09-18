@@ -6,13 +6,15 @@ export function Navbar() {
   return (
     <div className={style.img}>
 
+    <a href="/">
     <figure >
     <img src={logo} alt="Gratissimo_logo" />
     </figure>
+    </a>
 
       <nav className={style.Navstyle}>
         <ul>
-          <li><NavLink to={"/"}>Alle Jobs</NavLink></li>
+          <li><NavLink to={"/Søgeresultater"}>Alle Jobs</NavLink></li>
           <li><NavLink to={"/OpretAnnonce"}>Opret Annonce</NavLink></li>
           <li><NavLink to={"/Nyhedsside"}>Nyheder</NavLink></li>
            <li><NavLink to={"/OpretProfil"}>Opret Profil</NavLink></li>
