@@ -9,18 +9,18 @@ export function OpretBrugerForm() {
     const { login } = useAuth()
     const navigate = useNavigate()
 
-    const [firstname, setFirstname] = useState('')
-    const [lastname, setLastname] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [passwordGentag, setPasswordGentag] = useState('')
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
+    const [phone, setPhone] = useState('')
     const [errors, setErrors] = useState({})
     const [serverError, setServerError] = useState('')
 
     // Samme idé som i LoginForm: én fejlbesked pr. felt
     function validate() {
         const newErrors = {}
-        if (!firstname) newErrors.firstname = 'Skriv dit fornavn'
-        if (!lastname) newErrors.lastname = 'Skriv dit efternavn'
         if (!email) {
             newErrors.email = 'Skriv din email'
         } else if (!email.includes('@')) {
@@ -28,6 +28,15 @@ export function OpretBrugerForm() {
         }
         if (password.length < 6) {
             newErrors.password = 'Password skal være mindst 6 tegn'
+        }
+        if (passwordGentag !== password) {
+            newErrors.passwordGentag = 'De to passwords er ikke ens'
+        }
+        if (!firstname) newErrors.firstname = 'Skriv dit fornavn'
+        if (!lastname) newErrors.lastname = 'Skriv dit efternavn'
+        // Telefon er valgfrit, men skrives det, skal det være 8 tal
+        if (phone && (phone.length !== 8 || isNaN(phone))) {
+            newErrors.phone = 'Telefonnummeret skal være 8 tal'
         }
         setErrors(newErrors)
         return Object.keys(newErrors).length === 0
@@ -39,20 +48,23 @@ export function OpretBrugerForm() {
 
         if (!validate()) return
 
+        // Telefon kommer kun med, hvis det er udfyldt
+        const nyBruger = { email, password, firstname, lastname }
+        if (phone) nyBruger.phone = phone
+
         try {
-            // Opret brugeren i API'et
             const res = await fetch(`${API_URL}/api/users`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ firstname, lastname, email, password }),
+                body: JSON.stringify(nyBruger),
             })
 
             if (!res.ok) {
                 // Emailen skal være unik, så den mest sandsynlige fejl er, at den findes i forvejen
-                throw new Error('Brugeren kunne ikke oprettes. Måske findes emailen allerede')
+                throw new Error('Profilen kunne ikke oprettes. Måske findes emailen allerede')
             }
 
-            // Brugeren er oprettet, så vi logger ind med det samme og går til Min side
+            // Profilen er oprettet, så vi logger ind med det samme og går til Min side
             await login(email, password)
             navigate('/Minannonce')
         } catch (err) {
@@ -62,7 +74,37 @@ export function OpretBrugerForm() {
 
     return(
         <form className={style.Form} onSubmit={handleSubmit} noValidate>
-            <h2>Opret bruger</h2>
+            <h2>Opret ny profil</h2>
+
+            <label htmlFor="email">Email</label>
+            <input
+                id="email"
+                type="email"
+                placeholder="Skriv din email..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+            />
+            {errors.email && <p className={style.Fejl}>{errors.email}</p>}
+
+            <label htmlFor="password">Password</label>
+            <input
+                id="password"
+                type="password"
+                placeholder="Skriv dit password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
+            {errors.password && <p className={style.Fejl}>{errors.password}</p>}
+
+            <label htmlFor="passwordGentag">Gentag password</label>
+            <input
+                id="passwordGentag"
+                type="password"
+                placeholder="Skriv dit password..."
+                value={passwordGentag}
+                onChange={(e) => setPasswordGentag(e.target.value)}
+            />
+            {errors.passwordGentag && <p className={style.Fejl}>{errors.passwordGentag}</p>}
 
             <label htmlFor="firstname">Fornavn</label>
             <input
@@ -84,31 +126,21 @@ export function OpretBrugerForm() {
             />
             {errors.lastname && <p className={style.Fejl}>{errors.lastname}</p>}
 
-            <label htmlFor="email">Email</label>
+            <label htmlFor="phone">Telefon nummer</label>
             <input
-                id="email"
-                type="email"
-                placeholder="Skriv din email..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="phone"
+                type="tel"
+                placeholder="Skriv dit telefon nummer..."
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
             />
-            {errors.email && <p className={style.Fejl}>{errors.email}</p>}
-
-            <label htmlFor="password">Password</label>
-            <input
-                id="password"
-                type="password"
-                placeholder="Mindst 6 tegn..."
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            {errors.password && <p className={style.Fejl}>{errors.password}</p>}
+            {errors.phone && <p className={style.Fejl}>{errors.phone}</p>}
 
             {serverError && <p className={style.ServerFejl} role="alert">{serverError}</p>}
 
-            <button type="submit">Opret bruger</button>
+            <button type="submit">Opret profil</button>
 
-            <Link to="/Logind" className={style.Skift}>Har du allerede en bruger? Log ind</Link>
+            <Link to="/Logind" className={style.Skift}>Log ind</Link>
         </form>
     )
 }
