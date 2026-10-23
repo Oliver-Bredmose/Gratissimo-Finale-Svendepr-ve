@@ -37,6 +37,12 @@ export function AuthProvider({ children }) {
         setUser(data.user)
     }
 
+    // Bruges når brugeren har rettet sin profil, så det nye navn vises med det samme
+    function updateUser(nyBruger) {
+        Cookies.set('user', JSON.stringify(nyBruger), { expires: COOKIE_EXPIRES })
+        setUser(nyBruger)
+    }
+
     // Logger ud hos API'et og rydder cookies
     async function logout() {
         try {
@@ -55,7 +61,7 @@ export function AuthProvider({ children }) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, updateUser }}>
             {children}
         </AuthContext.Provider>
     )

@@ -12,6 +12,7 @@ Projektet er min svendeprøve fra webudvikleruddannelsen på Tech College Aalbor
 - Log ind og opret profil på én side. Login gemmes i cookies
 - Opret annonce med validering og fejlbesked på hvert felt
 - Min side med mine annoncer (slet) og mine favoritter (åbn og fjern)
+- Rediger profil
 - Tilmelding til nyhedsbrev
 - Responsivt design til mobil, tablet og desktop
 
