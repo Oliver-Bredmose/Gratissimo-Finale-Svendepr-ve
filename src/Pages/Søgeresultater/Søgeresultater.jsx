@@ -79,6 +79,11 @@ export function Søgeresultater() {
                         description={job.description}
                         city={job.city}
                         createdAt={job.createdAt}
+                        category={job.jobCategory?.name}
+                        workType={job.workType?.type}
+                        workHome={job.workHome}
+                        address={job.address}
+                        zipcode={job.zipcode}
                     />
                 ))}
             </section>

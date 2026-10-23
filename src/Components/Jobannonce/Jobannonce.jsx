@@ -5,8 +5,10 @@ import style from './Jobannonce.module.scss'
 import heartIcon from '../../assets/icons/icons8-favorite-50.png'
 import { useAuth } from '../../Hooks/useAuth'
 
-export function Jobannonce({ id, organization, title, description, city, createdAt }) {
+export function Jobannonce({ id, organization, title, description, city, createdAt, category, workType, workHome, address, zipcode }) {
     const { user } = useAuth()
+    // Styrer om kortet er foldet ud (Åben) eller lukket
+    const [erAaben, setErAaben] = useState(false)
     // Vises når man trykker Gem uden at være logget ind
     const [visLoginBesked, setVisLoginBesked] = useState(false)
     // Svar efter man har gemt, fx "Jobbet er gemt i dine favoritter"
@@ -41,22 +43,50 @@ export function Jobannonce({ id, organization, title, description, city, created
     }
 
     return (
-        <article className={style.Jobannonce}>
+        // Når kortet er åbent, får det også klassen Aaben (skygge i designet)
+        <article className={erAaben ? `${style.Jobannonce} ${style.Aaben}` : style.Jobannonce}>
             <div className={style.Tekst}>
                 <p className={style.Organisation}>{organization}</p>
                 <h2>{title}</h2>
-                <p className={style.Beskrivelse}>{description}</p>
+
+                {/* Lukket: kort beskrivelse. Åben: kategori og hele beskrivelsen */}
+                {erAaben ? (
+                    <>
+                        <p className={style.Kategori}>{category}</p>
+                        <h3>Beskrivelse</h3>
+                        <p className={style.FuldBeskrivelse}>{description}</p>
+                    </>
+                ) : (
+                    <p className={style.Beskrivelse}>{description}</p>
+                )}
             </div>
 
             <div className={style.Info}>
                 <p>Lokation: <strong>{city}</strong></p>
                 <p>Indrykket: <strong>{indrykket}</strong></p>
 
+                {erAaben && (
+                    <>
+                        <p>Arbejdstid: <strong>{workType}</strong></p>
+                        <p>Hjemmearbejde: <strong>{workHome}</strong></p>
+
+                        <div className={style.Kontakt}>
+                            <h3>Kontakt</h3>
+                            <p>{organization}</p>
+                            <p>{address}</p>
+                            <p>{zipcode} {city}</p>
+                        </div>
+                    </>
+                )}
+
                 <div className={style.Knapper}>
                     <button type="button" onClick={handleGem}>
                         Gem <img src={heartIcon} alt="" />
                     </button>
-                    <Link to={`/Søgeresultater/${id}`}>Åben</Link>
+                    {/* Samme knap åbner og lukker kortet. !erAaben vender true/false om */}
+                    <button type="button" onClick={() => setErAaben(!erAaben)} aria-expanded={erAaben}>
+                        {erAaben ? 'Luk' : 'Åben'}
+                    </button>
                 </div>
 
                 {visLoginBesked && (
