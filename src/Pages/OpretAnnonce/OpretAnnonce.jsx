@@ -92,6 +92,7 @@ export function OpretAnnonce() {
 
     return(
         <>
+            <title>Opret annonce | Gratissimo</title>
             <section className={style.Intro}>
                 <h1>Opret en annonce og find frivillige til din forening</h1>
                 <p>

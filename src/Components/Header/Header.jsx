@@ -6,7 +6,7 @@ export function Header() {
     return(
         <section className={style.Header}>
             <div className={style.container}>
-                <h2>Vi hjælper dig på vej til dit næste frivillige job</h2>
+                <p>Vi hjælper dig på vej til dit næste frivillige job</p>
                 <Link to="/Logind">Log ind eller opret dig</Link>
             </div>
         </section>

@@ -1,20 +1,46 @@
-# React + Vite
+# Gratissimo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+En jobportal for frivillige og foreninger. Frivillige kan søge og gemme jobs, og foreninger kan oprette annoncer og finde frivillige.
 
-Currently, two official plugins are available:
+Projektet er min svendeprøve fra webudvikleruddannelsen på Tech College Aalborg (september 2026) og er **videreudviklet efter svendeprøven**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Funktioner
 
-## React Compiler
+- Søgning i overskrift og tekst med filtre for region, kategori, arbejdstid, periode og hjemmearbejde
+- Kategorier med antal jobs, nyheder og en slider med udtalelser
+- Søgeresultater med pagination (5 pr. side), Gem / Fjern og jobkort der foldes ud
+- Log ind og opret profil på én side. Login gemmes i cookies
+- Opret annonce med validering og fejlbesked på hvert felt
+- Min side med mine annoncer (slet) og mine favoritter (åbn og fjern)
+- Tilmelding til nyhedsbrev
+- Responsivt design til mobil, tablet og desktop
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Teknik
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+- React 19, Vite og react-router-dom 7
+- SCSS modules
+- js-cookie til login-cookies
+- API: [gratissimo-api-sqlite](https://github.com/TCAA-Web/gratissimo-api-sqlite) (Node, Express, Prisma og SQLite)
 
-## Expanding the ESLint configuration
+## Kom i gang
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Gratissimo-Finale-Svendepr-ve
+1. Start API'et (kører på `http://localhost:4000`):
+
+   ```bash
+   cd gratissimo-api-sqlite
+   npm install
+   npm run dev
+   ```
+
+2. Start frontenden:
+
+   ```bash
+   npm install
+   npm run dev
+   ```
+
+3. Åbn `http://localhost:5173`
+
+Frontenden finder API'et via `VITE_PUBLIC_BASE_URL` i `.env`.
+
+Testbrugere ligger i API'ets seed-fil (`src/seeds/userSeed.ts`).

@@ -135,9 +135,12 @@
         span {
             width: 100%;
         }
+    }
+}
 
-        select {
-            flex: 1 1 140px;
-        }
+// Lille mobil: filtrene fylder bredden, to pr. række
+@media (max-width: 600px) {
+    .Filters select {
+        flex: 1 1 140px;
     }
 }

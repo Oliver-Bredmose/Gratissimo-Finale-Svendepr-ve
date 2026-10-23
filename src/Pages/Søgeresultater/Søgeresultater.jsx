@@ -128,6 +128,7 @@ export function Søgeresultater() {
 
     return (
         <>
+            <title>Alle jobs | Gratissimo</title>
             {/* key gør at filtrene starter forfra, når URL'en skifter (fx ved klik på "Alle Jobs") */}
             <Filtering key={searchParams.toString()} />
 

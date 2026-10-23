@@ -19,6 +19,8 @@ export function Nyhedsside() {
 
         return (
             <>
+                {/* Titlen er nyhedens overskrift, når den er hentet */}
+                <title>{data ? `${data.title} | Gratissimo` : 'Nyheder | Gratissimo'}</title>
                 <section className={style.NyhedsSide}>
                     {isLoading && <p className={style.Besked}>Henter nyhed...</p>}
                     {error && <p className={style.Besked}>Nyheden kunne ikke findes.</p>}

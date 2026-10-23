@@ -15,6 +15,7 @@ export function MinsideHeader() {
 
     return(
         <>
+            <title>Min side | Gratissimo</title>
             <section className={style.Intro}>
                 <h1>Velkommen {user.firstname}</h1>
                 <p>

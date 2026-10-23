@@ -11,6 +11,7 @@ export function Login() {
 
     return(
         <>
+            <title>{visOpret ? 'Opret profil | Gratissimo' : 'Log ind | Gratissimo'}</title>
             <section className={style.Intro}>
                 <h1>Log ind eller opret dig som bruger</h1>
                 <p>

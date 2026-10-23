@@ -39,12 +39,21 @@
     }
 }
 
-// Mobil: kortene står under hinanden
-@media (max-width: 768px) {
+// Tablet: 2 kort pr. række
+@media (max-width: 1000px) {
     .Kategorystyle {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
         grid-template-rows: none;
         grid-auto-flow: row;
+        column-gap: 1.25rem;
+        row-gap: 1.25rem;
+    }
+}
+
+// Mobil: kortene står under hinanden
+@media (max-width: 600px) {
+    .Kategorystyle {
+        grid-template-columns: 1fr;
         row-gap: 1rem;
     }
 }

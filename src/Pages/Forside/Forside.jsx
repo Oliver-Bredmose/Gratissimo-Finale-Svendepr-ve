@@ -21,6 +21,8 @@ export function Forside() {
 
         return(
             <>
+            {/* React 19 flytter selv <title> op i <head>, så hver side får sin egen titel */}
+            <title>Gratissimo - Find dit næste frivillige job</title>
             <Filtering/>
 
             <section className={style.Kategorier}>
