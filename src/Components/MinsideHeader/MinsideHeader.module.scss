@@ -1,0 +1,99 @@
+@use '../../globals.scss' as globals;
+
+// Lyserød velkomst-sektion
+.Intro {
+    background-color: globals.$color-light-grey;
+    padding: 4.5rem 0 2.5rem;
+    text-align: center;
+
+    h1 {
+        font-size: 2.75rem;
+        font-weight: 400;
+        margin-bottom: 3rem;
+    }
+
+    p {
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 0 1rem;
+        line-height: 1.4;
+    }
+}
+
+// Log ud og Rediger Profil står til højre
+.Links {
+    @include globals.container;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2.25rem;
+    margin-top: 4.5rem;
+
+    a, button {
+        background: none;
+        border: none;
+        color: globals.$color-Main-red;
+        font-family: inherit;
+        font-size: 1rem;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+}
+
+// To knapper i én pille. Den valgte er rød
+.Faner {
+    display: flex;
+    max-width: 900px;
+    margin: 4rem auto 0;
+    padding: 0 1rem;
+
+    a {
+        flex: 1;
+        padding: 0.9rem 1rem;
+        border: 1px solid globals.$color-border;
+        background-color: globals.$color-light-grey;
+        color: black;
+        font-size: 1.625rem;
+        text-align: center;
+        text-decoration: none;
+
+        &:first-child {
+            border-radius: 40px 0 0 40px;
+        }
+
+        &:last-child {
+            border-radius: 0 40px 40px 0;
+        }
+    }
+
+    // NavLink sætter aria-current="page" på den valgte fane
+    a[aria-current="page"] {
+        background-color: globals.$color-accent-red;
+        border-color: globals.$color-accent-red;
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+@media (max-width: 768px) {
+    .Intro {
+        padding: 2.5rem 0 1.5rem;
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .Links {
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .Faner {
+        margin-top: 2rem;
+
+        a {
+            font-size: 1.125rem;
+        }
+    }
+}

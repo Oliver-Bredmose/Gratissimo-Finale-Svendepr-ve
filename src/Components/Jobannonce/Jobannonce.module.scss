@@ -113,6 +113,17 @@
     img {
         width: 15px;
     }
+
+    // Slet og Fjern er røde knapper, som i designet
+    .Roed {
+        background-color: globals.$color-accent-red;
+        border-color: globals.$color-accent-red;
+        color: white;
+
+        &:hover {
+            background-color: globals.$color-Main-red;
+        }
+    }
 }
 
 // Beskeden når man prøver at gemme uden at være logget ind

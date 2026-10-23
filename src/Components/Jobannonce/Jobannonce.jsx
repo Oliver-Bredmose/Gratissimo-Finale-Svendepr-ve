@@ -5,7 +5,8 @@ import style from './Jobannonce.module.scss'
 import heartIcon from '../../assets/icons/icons8-favorite-50.png'
 import { useAuth } from '../../Hooks/useAuth'
 
-export function Jobannonce({ id, organization, title, description, city, createdAt, category, workType, workHome, address, zipcode }) {
+// onSlet og onFjern er valgfrie. Bruges kortet på Min side, vises Slet eller Fjern i stedet for Gem
+export function Jobannonce({ id, organization, title, description, city, createdAt, category, workType, workHome, address, zipcode, onSlet, onFjern }) {
     const { user } = useAuth()
     // Styrer om kortet er foldet ud (Åben) eller lukket
     const [erAaben, setErAaben] = useState(false)
@@ -80,9 +81,13 @@ export function Jobannonce({ id, organization, title, description, city, created
                 )}
 
                 <div className={style.Knapper}>
-                    <button type="button" onClick={handleGem}>
-                        Gem <img src={heartIcon} alt="" />
-                    </button>
+                    {onSlet && <button type="button" className={style.Roed} onClick={onSlet}>Slet</button>}
+                    {onFjern && <button type="button" className={style.Roed} onClick={onFjern}>Fjern</button>}
+                    {!onSlet && !onFjern && (
+                        <button type="button" onClick={handleGem}>
+                            Gem <img src={heartIcon} alt="" />
+                        </button>
+                    )}
                     {/* Samme knap åbner og lukker kortet. !erAaben vender true/false om */}
                     <button type="button" onClick={() => setErAaben(!erAaben)} aria-expanded={erAaben}>
                         {erAaben ? 'Luk' : 'Åben'}
