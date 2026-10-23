@@ -1,14 +1,28 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useFetch } from "../../Hooks/useFetch";
 import style from "./NyhedsCards.module.scss"
 
-export function NyhedsCards({antal}) {
+// tilfaeldig={true} starter et tilfældigt sted i listen, så forsiden viser forskellige nyheder
+export function NyhedsCards({antal, tilfaeldig}) {
 
   {/* henter data fra apiet */}
 
   const {data, error} = useFetch(
         import.meta.env.VITE_PUBLIC_BASE_URL + '/api/articles'
     );
+
+    // Et tilfældigt tal mellem 0 og 1. Funktionen i useState kører kun én gang,
+    // så tallet (og dermed nyhederne) ikke skifter, hver gang siden tegnes igen
+    const [tilfaeldigtTal] = useState(() => Math.random())
+
+    let nyheder = data || []
+    if (tilfaeldig && nyheder.length > 0) {
+      // Find et tilfældigt startsted og tag nyhederne derfra. % gør at listen starter forfra,
+      // så vi altid får nok nyheder, selvom startstedet er tæt på slutningen
+      const start = Math.floor(tilfaeldigtTal * nyheder.length)
+      nyheder = nyheder.map((item, index) => nyheder[(start + index) % nyheder.length])
+    }
 
     if (error) {
       return <p className={style.Fejl}>Nyhederne kunne ikke hentes. Prøv igen senere.</p>
@@ -18,7 +32,7 @@ export function NyhedsCards({antal}) {
         Uden antal giver slice alle nyhederne */}
    return (
   <div className={style.NyhedsCards}>
-    {data?.slice(0, antal).map((article) => (
+    {nyheder.slice(0, antal).map((article) => (
       <NavLink key={article.id} to={`/Nyhedsside/${article.id}`}>
         <article>
           <figure>

@@ -91,7 +91,6 @@ export function MinsideAnnoncevalgt() {
                 {viste.map((job) => (
                     <Jobannonce
                         key={job.id}
-                        id={job.id}
                         organization={job.organization}
                         title={job.title}
                         description={job.description}

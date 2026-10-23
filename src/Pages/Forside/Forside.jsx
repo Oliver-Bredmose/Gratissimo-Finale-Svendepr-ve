@@ -48,7 +48,7 @@ export function Forside() {
 
             <section className={style.Nyheder}>
                 <h2>Udvalgte Nyheder</h2>
-                <NyhedsCards antal={3}/>
+                <NyhedsCards antal={3} tilfaeldig={true}/>
             </section>
 
             <Testimonies testimonyData={testimonyData} />

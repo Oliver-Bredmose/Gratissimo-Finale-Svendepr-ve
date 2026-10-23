@@ -114,6 +114,13 @@
         width: 15px;
     }
 
+    // Det fyldte røde hjerte på Fjern-knappen
+    .Hjerte {
+        color: globals.$color-Main-red;
+        font-size: 1.1rem;
+        line-height: 1;
+    }
+
     // Slet og Fjern er røde knapper, som i designet
     .Roed {
         background-color: globals.$color-accent-red;

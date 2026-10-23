@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import Cookies from 'js-cookie'
+import { useAuth } from '../../Hooks/useAuth'
 import { useFetch } from '../../Hooks/useFetch'
 import { Filtering } from '../../Components/Filterring/Filtering'
 import { Jobannonce } from '../../Components/Jobannonce/Jobannonce'
@@ -9,6 +12,8 @@ import style from './Søgeresultater.module.scss'
 const PR_SIDE = 5
 
 export function Søgeresultater() {
+    const API_URL = import.meta.env.VITE_PUBLIC_BASE_URL
+
     // her bruger vi useSearchParams for at læse søgeord og filtre fra URL'en
     const [searchParams, setSearchParams] = useSearchParams()
     const tekst = searchParams.get('tekst')
@@ -19,9 +24,53 @@ export function Søgeresultater() {
     const hjemmearbejde = searchParams.get('hjemmearbejde')
 
     // Vi henter alle jobs én gang og filtrerer dem her i frontenden
-    const { data: jobsData, isLoading, error } = useFetch(
-        import.meta.env.VITE_PUBLIC_BASE_URL + '/api/job-listings'
-    )
+    const { data: jobsData, isLoading, error } = useFetch(API_URL + '/api/job-listings')
+
+    // Brugerens gemte jobs, så kortene kan vise "Fjern ♥" i stedet for "Gem"
+    const { user } = useAuth()
+    const [favoritter, setFavoritter] = useState([])
+
+    useEffect(() => {
+        if (!user) return
+
+        async function hentFavoritter() {
+            try {
+                const res = await fetch(`${import.meta.env.VITE_PUBLIC_BASE_URL}/api/favorites`, {
+                    headers: { Authorization: `Bearer ${Cookies.get('accessToken')}` },
+                })
+                if (res.ok) setFavoritter(await res.json())
+            } catch {
+                // Kan favoritterne ikke hentes, viser kortene bare "Gem"
+            }
+        }
+
+        hentFavoritter()
+    }, [user])
+
+    // Gemmer et job og lægger den nye favorit i listen
+    async function gemJob(jobId) {
+        const res = await fetch(`${API_URL}/api/favorites`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${Cookies.get('accessToken')}`,
+            },
+            body: JSON.stringify({ jobListingId: jobId }),
+        })
+        if (!res.ok) throw new Error()
+        const nyFavorit = await res.json()
+        setFavoritter([...favoritter, nyFavorit])
+    }
+
+    // Fjerner en favorit igen. API'et sletter på favorittens id, ikke jobbets
+    async function fjernFavorit(favoritId) {
+        const res = await fetch(`${API_URL}/api/favorites/${favoritId}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${Cookies.get('accessToken')}` },
+        })
+        if (!res.ok) throw new Error()
+        setFavoritter(favoritter.filter((favorit) => favorit.id !== favoritId))
+    }
 
     // Uden søgning og filtre vises alle jobs ("Alle Jobs" i menuen)
     // Hvert filter herunder fjerner de jobs, der ikke passer
@@ -90,22 +139,29 @@ export function Søgeresultater() {
                 )}
 
                 {/* her nede får vi dataen vist hvor vi bruger map igen for at få vist en article pr job */}
-                {visteJobs.map((job) => (
-                    <Jobannonce
-                        key={job.id}
-                        id={job.id}
-                        organization={job.organization}
-                        title={job.title}
-                        description={job.description}
-                        city={job.city}
-                        createdAt={job.createdAt}
-                        category={job.jobCategory?.name}
-                        workType={job.workType?.type}
-                        workHome={job.workHome}
-                        address={job.address}
-                        zipcode={job.zipcode}
-                    />
-                ))}
+                {visteJobs.map((job) => {
+                    // Find favoritten for dette job (kun når man er logget ind)
+                    const favorit = user ? favoritter.find((f) => f.jobListingId === job.id) : undefined
+
+                    return (
+                        <Jobannonce
+                            key={job.id}
+                            organization={job.organization}
+                            title={job.title}
+                            description={job.description}
+                            city={job.city}
+                            createdAt={job.createdAt}
+                            category={job.jobCategory?.name}
+                            workType={job.workType?.type}
+                            workHome={job.workHome}
+                            address={job.address}
+                            zipcode={job.zipcode}
+                            favoritId={favorit?.id}
+                            onGem={() => gemJob(job.id)}
+                            onFjernFavorit={() => fjernFavorit(favorit.id)}
+                        />
+                    )
+                })}
 
                 <Pagination side={side} antalSider={antalSider} onSkift={skiftSide} />
             </section>

@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import Cookies from 'js-cookie'
 import style from './Jobannonce.module.scss'
 import heartIcon from '../../assets/icons/icons8-favorite-50.png'
 import { useAuth } from '../../Hooks/useAuth'
 
-// onSlet og onFjern er valgfrie. Bruges kortet på Min side, vises Slet eller Fjern i stedet for Gem
-export function Jobannonce({ id, organization, title, description, city, createdAt, category, workType, workHome, address, zipcode, onSlet, onFjern }) {
+// På søgesiden: favoritId (findes hvis jobbet er gemt), onGem og onFjernFavorit styrer Gem / Fjern ♥.
+// På Min side: onSlet eller onFjern viser en rød Slet- eller Fjern-knap i stedet for Gem.
+export function Jobannonce({ organization, title, description, city, createdAt, category, workType, workHome, address, zipcode, favoritId, onGem, onFjernFavorit, onSlet, onFjern }) {
     const { user } = useAuth()
     // Styrer om kortet er foldet ud (Åben) eller lukket
     const [erAaben, setErAaben] = useState(false)
@@ -19,27 +19,26 @@ export function Jobannonce({ id, organization, title, description, city, created
     const dato = new Date(createdAt)
     const indrykket = `d. ${dato.getDate()}/${dato.getMonth() + 1}-${String(dato.getFullYear()).slice(2)}`
 
-    // Gem kræver login. Er man logget ind, gemmes jobbet i favoritter via API'et
+    // Gem kræver login. Er jobbet allerede gemt, fjerner knappen det igen.
+    // Selve kaldet til API'et ligger på søgesiden (onGem / onFjernFavorit),
+    // så søgesiden altid ved, hvilke jobs der er gemt
     async function handleGem() {
+        setBesked('')
         if (!user) {
             setVisLoginBesked(true)
             return
         }
 
         try {
-            const res = await fetch(`${import.meta.env.VITE_PUBLIC_BASE_URL}/api/favorites`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // API'et kræver accessToken for at vide, hvem der gemmer
-                    Authorization: `Bearer ${Cookies.get('accessToken')}`,
-                },
-                body: JSON.stringify({ jobListingId: id }),
-            })
-            if (!res.ok) throw new Error()
-            setBesked('Jobbet er gemt i dine favoritter')
+            if (favoritId) {
+                await onFjernFavorit()
+                setBesked('Jobbet er fjernet fra dine favoritter')
+            } else {
+                await onGem()
+                setBesked('Jobbet er gemt i dine favoritter')
+            }
         } catch {
-            setBesked('Jobbet kunne ikke gemmes. Prøv igen senere')
+            setBesked('Det virkede ikke. Prøv igen senere')
         }
     }
 
@@ -85,7 +84,12 @@ export function Jobannonce({ id, organization, title, description, city, created
                     {onFjern && <button type="button" className={style.Roed} onClick={onFjern}>Fjern</button>}
                     {!onSlet && !onFjern && (
                         <button type="button" onClick={handleGem}>
-                            Gem <img src={heartIcon} alt="" />
+                            {/* Gemt: Fjern med fyldt rødt hjerte. Ikke gemt: Gem med tomt hjerte */}
+                            {favoritId ? (
+                                <>Fjern <span className={style.Hjerte}>♥</span></>
+                            ) : (
+                                <>Gem <img src={heartIcon} alt="" /></>
+                            )}
                         </button>
                     )}
                     {/* Samme knap åbner og lukker kortet. !erAaben vender true/false om */}

@@ -88,7 +88,6 @@ export function MinsideFavoritvalgt() {
                 {viste.map((favorit) => (
                     <Jobannonce
                         key={favorit.id}
-                        id={favorit.jobListing.id}
                         organization={favorit.jobListing.organization}
                         title={favorit.jobListing.title}
                         description={favorit.jobListing.description}
