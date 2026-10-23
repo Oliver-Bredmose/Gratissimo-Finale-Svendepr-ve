@@ -1,4 +1,4 @@
-import style from './../Filterring/Filtering.module.scss'
+import style from './Filtering.module.scss'
 import { useFetch } from '../../Hooks/useFetch'
 import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';

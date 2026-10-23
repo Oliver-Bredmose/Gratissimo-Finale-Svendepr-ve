@@ -1,5 +1,5 @@
-import { Filtering } from "../../Components/Filterring/Filtering";
-import { Kategorijob } from "../../Components/Katekorijob/katekorijob";
+import { Filtering } from "../../Components/Filtering/Filtering";
+import { Kategorijob } from "../../Components/Kategorijob/Kategorijob";
 import { NyhedsCards } from "../../Components/NyhedsCards/NyhedsCards";
 import { Testimonies } from "../../Components/Testimonies/Testimonies";
 import { useFetch } from "../../Hooks/useFetch"
