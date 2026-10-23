@@ -2,31 +2,37 @@
 
 .Kategorijob {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  height: 62px;
+  border: 1px solid globals.$color-border;
+  border-radius: 10px;
   overflow: hidden;
   background: #fff;
-  
+  color: inherit;
+  text-decoration: none;
 
-  h5 {
+  // Navnet fylder resten af kortet og står i midten
+  h3 {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
-    padding: 1rem 1.5rem;
+    font-size: 1.25rem;
     font-weight: 400;
   }
 
+  // Antal jobs i den lyserøde boks til højre
   p {
-    margin: 0;
-    padding: 1rem 2rem;
-    background: #faf0ee;
-    align-self: stretch;
+    width: 110px;
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin: 0;
+    font-size: 1.25rem;
+    background: globals.$color-light-grey;
   }
 
-  a {
-    color: inherit;
-    text-decoration: none;
+  &:hover {
+    border-color: globals.$color-Main-red;
   }
 }

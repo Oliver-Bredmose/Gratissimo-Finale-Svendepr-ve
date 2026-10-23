@@ -3,30 +3,141 @@
 
 .Filtersection{
     background-color: globals.$color-light-grey;
-    
-    input{
-        border-radius: 20px;
-        margin-left: 5vh;
+    padding: 4rem 0 2.5rem;
+
+    h1{
+        font-size: 2.25rem;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.container {
+    @include globals.container;
+}
+
+// Søgefeltet med lup til venstre og rød knap til højre
+.Searchbar {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid globals.$color-border;
+    border-radius: 40px;
+    overflow: hidden;
+    height: 80px;
+
+    img {
+        width: 30px;
+        margin-left: 1.5rem;
+    }
+
+    input {
+        flex: 1;
+        min-width: 0;
+        height: 100%;
+        border: none;
+        outline: none;
+        padding: 0 1rem;
+        font-family: inherit;
+        font-size: 1.5rem;
+    }
+
+    button {
+        height: 100%;
+        width: 140px;
+        border: none;
+        background-color: globals.$color-Main-red;
+        color: white;
+        font-family: inherit;
+        font-size: 1.5rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: globals.$color-accent-red;
+        }
+    }
+}
+
+// Rækken med filtre under søgefeltet
+.Filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+
+    span {
+        font-size: 1.25rem;
+        margin-right: 1rem;
     }
 
     select{
-        
+        appearance: none;
+        min-width: 136px;
+        height: 40px;
+        padding: 0 2.25rem 0 1rem;
+        border: 1px solid globals.$color-border;
         border-radius: 20px;
-        padding-left: 5px;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        margin-left: 50px;
-        margin-bottom: 10px;
-        text-align: center;
+        background: white url('../../assets/icons/icons8-chevron-30.png') no-repeat right 0.9rem center;
+        background-size: 12px;
+        font-family: inherit;
+        font-size: 0.875rem;
+        cursor: pointer;
+    }
+}
+
+.Reset {
+    border: none;
+    background: none;
+    font-family: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: 1rem;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Mobil: mindre søgefelt, og filtrene fylder hele bredden
+@media (max-width: 768px) {
+    .Filtersection {
+        padding: 2.5rem 0 2rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
     }
 
-    h1{
-        margin-left: 5vh;
+    .Searchbar {
+        height: 56px;
 
+        img {
+            width: 22px;
+            margin-left: 1rem;
+        }
+
+        input, button {
+            font-size: 1rem;
+        }
+
+        button {
+            width: 90px;
+        }
     }
-    
-    h3{
-        margin-left: 5vh;
-        padding-bottom: 10px;
+
+    .Filters {
+        justify-content: flex-start;
+        margin-top: 1.5rem;
+
+        span {
+            width: 100%;
+        }
+
+        select {
+            flex: 1 1 140px;
+        }
     }
 }

@@ -1,15 +1,12 @@
 import { Link } from 'react-router-dom'
 import style from './../Katekorijob/Kategorijob.module.scss'
 
-export function Kategorijob({id, name}) {
+// Hele kortet er et link til søgeresultater med kategorien valgt
+export function Kategorijob({id, name, antal}) {
     return(
-        <>
-        <section className={style.Kategorijob}>
-                <Link to={`/Søgeresultater?kategori=${id}`}>
-                    <h5>{name}</h5>
-                </Link>
-                <p>{id}</p>
-        </section>
-        </>
+        <Link to={`/Søgeresultater?kategori=${id}`} className={style.Kategorijob}>
+            <h3>{name}</h3>
+            <p>{antal}</p>
+        </Link>
     )
 }

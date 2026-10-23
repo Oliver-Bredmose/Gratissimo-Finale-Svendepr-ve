@@ -1,3 +1,12 @@
 $color-Main-red: #AB0E0E;
 $color-accent-red: #8B0808;
 $color-light-grey: #F5EEEC;
+$color-off-white: #F8F8F8;
+$color-border: #D9D9D9;
+
+// Holder indholdet i samme bredde som designet og centrerer det
+@mixin container {
+    max-width: 1122px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
