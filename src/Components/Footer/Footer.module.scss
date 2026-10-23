@@ -1,38 +1,120 @@
 @use '../../globals.scss' as globals;
 
 .footerStyle {
+    margin-top: auto;
+    padding: 4rem 0 3.5rem;
+    background-color: globals.$color-Main-red;
+    color: white;
+    font-size: 0.75rem;
+
+    h3 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+// Lidt bredere end resten af siden, som i designet
+.container {
     display: flex;
     justify-content: space-between;
-    padding: 2rem;
-    color: white;
-    bottom: 0;
-    width: 100%;
-    margin-top: auto;
-    background-color: globals.$color-Main-red;
+    gap: 2rem;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
+.Nyhedsbrev {
+    max-width: 290px;
 
+    p {
+        margin-bottom: 1.25rem;
+    }
+
+    // Feltet og knappen sidder sammen som én pille
     form {
         display: flex;
-        gap: 0.5rem;
-        margin-top: 1rem;
+        height: 32px;
     }
 
     input {
-        padding: 0.5rem 0.75rem;
+        flex: 1;
+        min-width: 0;
+        padding: 0 0.75rem;
         border: none;
-        border-radius: 4px;
-        font-size: 0.9rem;
+        border-radius: 6px 0 0 6px;
+        background-color: globals.$color-light-grey;
         font-family: inherit;
+        font-size: 0.75rem;
     }
 
-    input[type="submit"] {
+    button {
+        padding: 0 0.9rem;
+        border: none;
+        border-radius: 0 6px 6px 0;
         background-color: globals.$color-accent-red;
         color: white;
+        font-family: inherit;
+        font-size: 0.75rem;
         cursor: pointer;
+
+        &:hover {
+            background-color: #6E0606;
+        }
     }
 
-    img{
-        max-width: 35px;
-        max-height: 35px;
+    // Beskeden under feltet
+    .Besked {
+        margin: 0.75rem 0 0;
+        font-weight: 600;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+}
+
+
+.Kontakt {
+    address {
+        font-style: normal;
+        margin-bottom: 1.5rem;
+    }
+}
+
+.SoMe {
+    display: flex;
+    gap: 0.75rem;
+
+    img {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+// Tablet og mobil: kolonnerne lægger sig i flere rækker
+@media (max-width: 900px) {
+    .container {
+        flex-wrap: wrap;
+        row-gap: 2.5rem;
+    }
+
+    .Nyhedsbrev {
+        max-width: none;
+        width: 100%;
+        order: -1;
     }
 }

@@ -1,32 +1,59 @@
 @use '../../globals.scss' as globals;
 
-
-.Kategorystyle{
-    display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  padding: 0 2rem 3rem;
+.container {
+    @include globals.container;
 }
 
-.Loginbtn{
-    display: flex;
-    justify-content: space-between;
-    margin-right: 30px;
-    margin-top: 20px;
-    
+// Sektionen med kategorikortene
+.Kategorier {
+    background-color: globals.$color-off-white;
+    padding: 3.5rem 0;
 
-    h2{
-        display: flex;
-        margin-left: 30px;
-        margin-top: 20px;
-        
+    h2 {
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 2.5rem;
     }
-        a{
-            background-color: globals.$color-Main-red;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            padding: 8px 40px;   
-            align-self: center;
-        }
+}
+
+// Kortene fylder kolonne for kolonne, ligesom i designet
+.Kategorystyle {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-auto-flow: column;
+    column-gap: 2.25rem;
+    row-gap: 1.8rem;
+}
+
+// Udvalgte nyheder på lyserød baggrund
+.Nyheder {
+    background-color: globals.$color-light-grey;
+    padding: 4rem 0;
+
+    h2 {
+        @include globals.container;
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 2.5rem;
+    }
+}
+
+// Tablet: 2 kort pr. række
+@media (max-width: 1000px) {
+    .Kategorystyle {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: none;
+        grid-auto-flow: row;
+        column-gap: 1.25rem;
+        row-gap: 1.25rem;
+    }
+}
+
+// Mobil: kortene står under hinanden
+@media (max-width: 600px) {
+    .Kategorystyle {
+        grid-template-columns: 1fr;
+        row-gap: 1rem;
+    }
 }

@@ -1,0 +1,23 @@
+@use '../../globals.scss' as globals;
+
+// Listen med jobannoncer er lidt bredere end resten af indholdet, som i designet
+.Resultater {
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 4rem 1rem;
+}
+
+.Besked {
+    text-align: center;
+    font-size: 1.125rem;
+}
+
+@media (max-width: 768px) {
+    .Resultater {
+        gap: 1.25rem;
+        padding: 2rem 1rem;
+    }
+}
