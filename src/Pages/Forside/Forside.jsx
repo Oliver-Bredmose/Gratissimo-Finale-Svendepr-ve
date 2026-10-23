@@ -4,7 +4,6 @@ import { NyhedsCards } from "../../Components/NyhedsCards/NyhedsCards";
 import { Testimonies } from "../../Components/Testimonies/Testimonies";
 import { useFetch } from "../../Hooks/useFetch"
 import style from "./Forside.module.scss"
-import { Link } from "react-router-dom"
 
 export function Forside() {
 
@@ -26,13 +25,6 @@ export function Forside() {
 
         return(
             <>
-        <section className={style.Loginbtn}>
-            <div className={style.container}>
-                <h2>Vi hjælper dig på vej til dit næste frivillige job</h2>
-                <Link to="/Logind">Log ind eller opret dig</Link>
-            </div>
-        </section>
-
             <Filtering/>
 
             <section className={style.Kategorier}>

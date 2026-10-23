@@ -1,7 +1,7 @@
 import style from './../Filterring/Filtering.module.scss'
 import { useFetch } from '../../Hooks/useFetch'
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import searchIcon from '../../assets/icons/icons8-search-50.png'
 
 // set api url'et til et const så det er nemmere at rette og skifte + nemmere at læse koden
@@ -10,14 +10,16 @@ const API_URL = import.meta.env.VITE_PUBLIC_BASE_URL
 
 export function Filtering() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
 
   // Et state til søgefeltet og et til hvert filter
-  const [tekst, setTekst] = useState('')
-  const [region, setRegion] = useState('')
-  const [category, setCategory] = useState('')
-  const [arbejdstid, setArbejdstid] = useState('')
-  const [periode, setPeriode] = useState('')
-  const [hjemmearbejde, setHjemmearbejde] = useState('')
+  // Startværdien hentes fra URL'en, så søgningen står der stadig på søgesiden
+  const [tekst, setTekst] = useState(searchParams.get('tekst') || '')
+  const [region, setRegion] = useState(searchParams.get('region') || '')
+  const [category, setCategory] = useState(searchParams.get('kategori') || '')
+  const [arbejdstid, setArbejdstid] = useState(searchParams.get('arbejdstid') || '')
+  const [periode, setPeriode] = useState(searchParams.get('periode') || '')
+  const [hjemmearbejde, setHjemmearbejde] = useState(searchParams.get('hjemmearbejde') || '')
 
 //   API linket ligger på "job-categories" ikke "categories"
 

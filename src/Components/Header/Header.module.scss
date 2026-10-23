@@ -1,0 +1,51 @@
+@use '../../globals.scss' as globals;
+
+// Header med tekst og rød "Log ind eller opret dig"-knap
+.Header {
+    background-color: globals.$color-off-white;
+    padding: 2.5rem 0;
+
+    h2 {
+        font-size: 1.375rem;
+        font-weight: 300;
+    }
+
+    a {
+        background-color: globals.$color-accent-red;
+        color: white;
+        text-decoration: none;
+        border-radius: 30px;
+        font-size: 1.5rem;
+        padding: 0.6rem 4rem;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: globals.$color-Main-red;
+        }
+    }
+}
+
+.container {
+    @include globals.container;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+// Mobil: teksten og knappen stables
+@media (max-width: 768px) {
+    .Header {
+        padding: 1.5rem 0;
+
+        a {
+            font-size: 1.125rem;
+            padding: 0.6rem 2rem;
+        }
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

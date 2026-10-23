@@ -1,0 +1,75 @@
+@use '../../globals.scss' as globals;
+
+.Jobside {
+    @include globals.container;
+    padding-top: 3rem;
+    padding-bottom: 4rem;
+}
+
+.Tilbage {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: globals.$color-Main-red;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+// Samme hvide kort som på søgesiden
+.Kort {
+    background-color: white;
+    border: 1px solid globals.$color-border;
+    border-radius: 12px;
+    padding: 3rem 4.5rem;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 500;
+        margin: 0.6rem 0 1.5rem;
+    }
+}
+
+.Organisation {
+    font-size: 0.875rem;
+    color: #555;
+}
+
+.Beskrivelse {
+    max-width: 700px;
+    line-height: 1.5;
+    margin-bottom: 2rem;
+}
+
+// Jobinfo i to kolonner
+.Info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid globals.$color-border;
+
+    dt {
+        font-size: 0.8125rem;
+        color: #555;
+    }
+
+    dd {
+        font-weight: 600;
+    }
+}
+
+@media (max-width: 768px) {
+    .Kort {
+        padding: 1.5rem;
+
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+
+    .Info {
+        grid-template-columns: 1fr;
+    }
+}
