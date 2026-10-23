@@ -1,0 +1,137 @@
+@use '../../globals.scss' as globals;
+
+// Lyserød sektion med overskrift og tekst
+.Intro {
+    background-color: globals.$color-light-grey;
+    padding: 4.5rem 1rem;
+    text-align: center;
+
+    h1 {
+        font-size: 2.75rem;
+        font-weight: 400;
+        margin-bottom: 3rem;
+    }
+
+    p {
+        max-width: 640px;
+        margin: 0 auto 3rem;
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    a {
+        color: globals.$color-Main-red;
+    }
+}
+
+.Formular {
+    padding: 4rem 1rem 6rem;
+}
+
+// Selve formularen, smal og centreret
+.Form {
+    display: flex;
+    flex-direction: column;
+    max-width: 380px;
+    margin: 0 auto;
+
+    h2 {
+        text-align: center;
+        font-size: 2.25rem;
+        font-weight: 400;
+        margin-bottom: 2.5rem;
+    }
+
+    label {
+        font-size: 1.0625rem;
+        margin: 1.5rem 0 0.3rem;
+
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+
+    input {
+        height: 46px;
+        padding: 0 0.9rem;
+        background-color: globals.$color-light-grey;
+        border: 1px solid globals.$color-border;
+        border-radius: 6px;
+        font-family: inherit;
+        font-size: 0.95rem;
+
+        &:focus {
+            outline: 2px solid globals.$color-Main-red;
+            outline-offset: 1px;
+        }
+    }
+
+    button {
+        height: 38px;
+        margin-top: 3.5rem;
+        border: none;
+        border-radius: 20px;
+        background-color: globals.$color-Main-red;
+        color: white;
+        font-family: inherit;
+        font-size: 1.0625rem;
+        cursor: pointer;
+
+        &:hover {
+            background-color: globals.$color-accent-red;
+        }
+    }
+}
+
+// Fejlbesked under et felt
+.Fejl {
+    color: globals.$color-Main-red;
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+}
+
+// Fejl fra API'et, fx forkert password
+.ServerFejl {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    background-color: globals.$color-light-grey;
+    color: globals.$color-Main-red;
+    text-align: center;
+}
+
+// Link der skifter mellem log ind og opret
+.Skift {
+    margin-top: 1.5rem;
+    color: globals.$color-Main-red;
+    font-size: 1.0625rem;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+@media (max-width: 768px) {
+    .Intro {
+        padding: 2.5rem 1rem;
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .Formular {
+        padding: 2.5rem 1rem 4rem;
+    }
+
+    .Form h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
+    }
+}
