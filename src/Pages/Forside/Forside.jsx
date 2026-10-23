@@ -17,11 +17,7 @@ export function Forside() {
         // Alle jobs hentes, så vi kan tælle hvor mange der er i hver kategori
         const { data: jobsData } = useFetch( import.meta.env.VITE_PUBLIC_BASE_URL + '/api/job-listings')
 
-        const {
-            data: testimonyData,
-            isLoading: testimonyLoading,
-            error: testimonyError,
-            } = useFetch( import.meta.env.VITE_PUBLIC_BASE_URL + '/api/testimony');
+        const { data: testimonyData } = useFetch( import.meta.env.VITE_PUBLIC_BASE_URL + '/api/testimony');
 
         return(
             <>

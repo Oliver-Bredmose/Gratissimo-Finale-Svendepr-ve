@@ -4,9 +4,12 @@ import Cookies from "js-cookie"
 import { useAuth } from "../../Hooks/useAuth"
 import { MinsideHeader } from "../../Components/MinsideHeader/MinsideHeader"
 import { Jobannonce } from "../../Components/Jobannonce/Jobannonce"
+import { Pagination } from "../../Components/Pagination/Pagination"
 import style from "../MinSideAnnoncevalgt/MinsideAnnoncevalgt.module.scss"
 
 const API_URL = import.meta.env.VITE_PUBLIC_BASE_URL
+// Antal pr. side
+const PR_SIDE = 5
 
 export function MinsideFavoritvalgt() {
     const { user } = useAuth()
@@ -14,6 +17,8 @@ export function MinsideFavoritvalgt() {
     const [favoritter, setFavoritter] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState('')
+    // Hvilken side i pagination man er på
+    const [side, setSide] = useState(1)
 
     // Favoritter kræver login, så accessToken sendes med
     useEffect(() => {
@@ -44,7 +49,12 @@ export function MinsideFavoritvalgt() {
                 headers: { Authorization: `Bearer ${Cookies.get('accessToken')}` },
             })
             if (!res.ok) throw new Error()
-            setFavoritter(favoritter.filter((favorit) => favorit.id !== id))
+            const nyListe = favoritter.filter((favorit) => favorit.id !== id)
+            setFavoritter(nyListe)
+            // Var det den sidste på siden, går vi en side tilbage
+            if (side > 1 && side > Math.ceil(nyListe.length / PR_SIDE)) {
+                setSide(side - 1)
+            }
         } catch {
             setError('Favoritten kunne ikke fjernes. Prøv igen senere')
         }
@@ -54,11 +64,20 @@ export function MinsideFavoritvalgt() {
         return <Navigate to="/Logind" replace />
     }
 
+    // Kun de 5, der hører til den valgte side
+    const antalSider = Math.ceil(favoritter.length / PR_SIDE)
+    const viste = favoritter.slice((side - 1) * PR_SIDE, side * PR_SIDE)
+
+    function skiftSide(nySide) {
+        setSide(nySide)
+        document.getElementById('liste').scrollIntoView({ behavior: 'smooth' })
+    }
+
     return(
         <>
             <MinsideHeader />
 
-            <section className={style.Liste}>
+            <section id="liste" className={style.Liste}>
                 {isLoading && <p className={style.Besked}>Henter dine favoritter...</p>}
                 {error && <p className={style.Besked} role="alert">{error}</p>}
                 {!isLoading && !error && favoritter.length === 0 && (
@@ -66,7 +85,7 @@ export function MinsideFavoritvalgt() {
                 )}
 
                 {/* Hver favorit har selve jobbet liggende i favorit.jobListing */}
-                {favoritter.map((favorit) => (
+                {viste.map((favorit) => (
                     <Jobannonce
                         key={favorit.id}
                         id={favorit.jobListing.id}
@@ -83,6 +102,8 @@ export function MinsideFavoritvalgt() {
                         onFjern={() => handleFjern(favorit.id)}
                     />
                 ))}
+
+                <Pagination side={side} antalSider={antalSider} onSkift={skiftSide} />
             </section>
         </>
     )

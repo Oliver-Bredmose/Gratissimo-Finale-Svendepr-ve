@@ -1,0 +1,70 @@
+@use '../../globals.scss' as globals;
+
+// Pille med pile og runde sidetal, som i designet
+.Pagination {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 0.6rem 1rem;
+    border: 1px solid globals.$color-border;
+    border-radius: 40px;
+
+    button {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        border: 1px solid globals.$color-border;
+        border-radius: 50%;
+        background-color: globals.$color-light-grey;
+        font-family: inherit;
+        font-size: 0.9rem;
+        cursor: pointer;
+
+        &:hover:not(:disabled) {
+            border-color: globals.$color-Main-red;
+        }
+
+        &:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+    }
+
+    // Den side man er på, er rød
+    .Aktiv {
+        background-color: globals.$color-accent-red;
+        border-color: globals.$color-accent-red;
+        color: white;
+    }
+
+    .Pil {
+        background-color: white;
+        margin: 0 0.4rem;
+
+        img {
+            display: block;
+            width: 14px;
+            margin: 0 auto;
+        }
+    }
+}
+
+// Mobil: lidt mindre, så 8 sidetal kan være der
+@media (max-width: 480px) {
+    .Pagination {
+        gap: 0.3rem;
+        padding: 0.5rem 0.6rem;
+
+        button {
+            width: 27px;
+            height: 27px;
+            font-size: 0.8rem;
+        }
+
+        .Pil {
+            margin: 0;
+        }
+    }
+}
