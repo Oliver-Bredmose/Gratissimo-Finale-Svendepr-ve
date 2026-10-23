@@ -50,10 +50,12 @@ export function Forside() {
                 </div>
             </section>
 
-            <section>
+            <section className={style.Nyheder}>
+                <h2>Udvalgte Nyheder</h2>
                 <NyhedsCards antal={3}/>
-                <Testimonies testimonyData={testimonyData} />
             </section>
+
+            <Testimonies testimonyData={testimonyData} />
         </>
     )
 }

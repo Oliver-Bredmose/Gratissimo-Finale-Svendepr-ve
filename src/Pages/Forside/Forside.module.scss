@@ -26,6 +26,19 @@
     row-gap: 1.8rem;
 }
 
+// Udvalgte nyheder på lyserød baggrund
+.Nyheder {
+    background-color: globals.$color-light-grey;
+    padding: 4rem 0;
+
+    h2 {
+        @include globals.container;
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 2.5rem;
+    }
+}
+
 // Mobil: kortene står under hinanden
 @media (max-width: 768px) {
     .Kategorystyle {
